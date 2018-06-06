@@ -1,0 +1,92 @@
+apply plugin: 'com.android.application'
+apply plugin: 'bugly'
+
+bugly {
+    appId = 'ef48d6a01a'
+    appKey = 'd4e77414-fa29-4beb-a003-1398230befbc'
+    execute = 'true'
+    upload = 'true'
+//    outputDir = ''
+}
+
+android {
+    sourceSets.main {
+        jniLibs.srcDir 'libs'
+        jni.srcDirs = [] //disable automatic ndk-build call
+    }
+    defaultConfig {
+        applicationId "com.bailingcloud.bailingvideo"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 6
+        versionName VERSION_APP_NAME
+
+        testApplicationId "com.bailingcloud.bailingvideo.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        // Enabling multidex support.
+        multiDexEnabled true
+
+        // bugly config
+        ndk {
+            abiFilters 'armeabi-v7a' , 'arm64-v8a'//,'x86', 'armeab', 'x86_64'
+        }
+    }
+    buildTypes {
+
+        debug {
+            debuggable true
+            jniDebuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            debuggable false
+            jniDebuggable false
+            minifyEnabled true
+            shrinkResources false
+            zipAlignEnabled true
+            proguardFile 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name == 'release') {
+                outputFileName="${RELEASE_NAME}_release.apk"
+            }else{
+                outputFileName = "${RELEASE_NAME}_debug.apk"
+            }
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    compileSdkVersion 24
+    buildToolsVersion '27.0.0'
+}
+
+dependencies {
+    compile 'com.android.support:support-annotations:25.3.1'
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.1.5
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
+    compile 'com.android.support:design:24.0.0-alpha1'
+    compile 'com.android.support:support-v4:24.0.0-alpha1'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+
+    compile files('libs/gson-2.3.1.jar')
+    compile files('libs/bailingquic-sources.jar')
+    compile files('libs/bailingvideo_engine_api_2.0.1.jar')
+    implementation files('libs/quic.jar')
+}
+
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd_HHmm")
+}

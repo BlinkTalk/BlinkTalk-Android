@@ -1,22 +1,42 @@
-# Compiled class file
-*.class
+.idea
+local.properties
+.gradle
+*.iml
+build
+app/BuglyUploadLog.txt
+*.h
+*.cc
+*.gypi
+*.cpp
+*.c
+*.tab
+*.s
+*.gn
+*.py
+*.chromium
+*.mm
+*.pump
+*.settings
+*.md
+*.m
+*.pch
+*.plist
+*.ttf
+*.mp3
+*.proto
+*.gni
+*.xls
+*.cur
+*.rc
+*.sh
+*.cfg
+*.y4m
+*.modulemap
+*.podspec
+*.rtcp
+*.sdp
+*.tokens
+*.stun
+*.js
+*.gitignore
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
