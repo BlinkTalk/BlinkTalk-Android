@@ -742,6 +742,10 @@ private Sensor sensor;
     }
 
     private void logonToServer() {
+        if(TextUtils.isEmpty(APPID)){
+            Toast.makeText(this, "APPID为空,请申请!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
             deviceId = getDeviceId();
             if (TextUtils.isEmpty(deviceId)) {

@@ -111,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/room_userName"
-                    android:textAlignment="center"
+                    android:gravity="center_horizontal"
                     android:textColor="@color/blink_blue"
                     android:textSize="20sp" />
 
